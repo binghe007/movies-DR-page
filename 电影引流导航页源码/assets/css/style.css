@@ -1,0 +1,743 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+header h1 {
+    color: #333;
+    margin-bottom: 5px;
+    font-size: 24px;
+}
+
+header p {
+    color: #666;
+}
+
+.content-list {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 10px; /* 添加内边距 */
+}
+
+/* 整个框可点击的样式 - 修复版本 */
+.content-item-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    margin-bottom: 6px; /* 按钮之间的空隙 */
+}
+
+.content-item-link:last-child {
+    margin-bottom: 0;
+}
+
+.content-item-link:hover .content-item {
+    background: linear-gradient(to right, #ff9269, #ffaa8b);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.content-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 6px;
+    /* 确保没有下划线 */
+    border: none;
+    text-decoration: none;
+}
+
+.content-item * {
+    text-decoration: none !important; /* 确保所有子元素都没有下划线 */
+}
+
+.item-title {
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none !important;
+}
+
+.arrow {
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none !important;
+}
+
+/* 其他样式保持不变... */
+footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
+    padding: 15px;
+    font-size: 14px;
+}
+
+.admin-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.admin-link a {
+    color: #666;
+    text-decoration: none;
+}
+
+.admin-link a:hover {
+    text-decoration: underline;
+}
+
+/* 登录表单样式 */
+.login-form {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    max-width: 400px;
+    margin: 50px auto;
+}
+
+.login-form h2 {
+    text-align: center;
+    margin-bottom极速影视: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+button {
+    background: #ff7e5f;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #feb47b;
+}
+
+.error {
+    color: red;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #ffe6e6;
+    border-radius: 4px;
+    border: 1px solid #ffcd极速影视d2;
+}
+
+.message {
+    color: green;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #e6ffe6;
+    border-radius: 4px;
+    border: 1px solid #c8e6c9;
+}
+
+/* 后台管理样式 */
+.dashboard {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.stats {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.admin-actions h2 {
+    margin-bottom: 20px;
+}
+
+.action-item {
+    margin-bottom: 30px;
+    padding-bottom: 20极速影视px;
+    border-bottom: 1px solid #eee;
+}
+
+.action-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.action-item h3 {
+    margin-bottom: 15px;
+}
+
+.action-item a {
+    color: #ff7e5f;
+    text-decoration: none;
+}
+
+.action-item a:hover {
+    text-decoration: underline;
+}
+
+/* 标签页样式 */
+.tab-content { 
+    display: none; 
+}
+
+.tab-content.active { 
+    display: block; 
+}
+
+.tab-button { 
+    padding: 10px 15px; 
+    margin-right: 5px; 
+    background: #eee; 
+    border: none; 
+    cursor: pointer; 
+    border-radius: 4px 4px 0 0;
+}
+
+.tab-button.active { 
+    background: #ff7e5f; 
+    color: white; 
+}
+
+.button-list { 
+    list-style: none; 
+    margin: 15px 0; 
+}
+
+.button-list li { 
+    padding: 10px极速影视; 
+    background:极速影视 #f9f9f9; 
+    margin-bottom: 5px; 
+    border-radius: 4px; 
+极速影视    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+.button-actions { 
+    display: flex; 
+    gap: 5px; 
+}
+
+.button-actions form { 
+    margin: 0; 
+}
+
+.sortable-placeholder {
+    height: 40px;
+    background: #eee;
+    margin-bottom: 5极速影视px;
+    border-radius: 4px;
+}
+
+.file-list {
+    list-style: none;
+    margin: 15px 0;
+}
+
+.file-list li {
+    padding: 10px;
+    background: #f9f9f9;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 编辑页面样式 */
+.edit-page-btn {
+    padding: 5px 10px;
+    background: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+}
+
+.edit-page-btn:hover {
+    background: #45a049;
+}
+
+.editor-actions {
+    margin: 15px 0;
+    display: flex;
+    gap: 10px;
+}
+
+.editor-actions a {
+    padding: 8px 15px;
+    background: #eee;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #333;
+    transition: background 0.3s ease;
+}
+
+.editor-actions a:hover {
+    background: #ddd;
+}
+
+/* 登录容器样式 */
+.login-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* 响应式设计 */
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .content-item {
+        padding: 12px 15px;
+    }
+    
+    .item-title {
+        font-size: 14px;
+    }
+    
+    .dashboard {
+        padding: 15px;
+    }
+    
+    .button-actions {
+        flex-direction: column;
+    }
+    
+    .editor-actions {
+        flex-direction: column;
+    }
+    
+    .content-item-link {
+        margin-bottom: 6px;
+    }
+}* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+header h1 {
+    color: #333;
+    margin-bottom: 5px;
+    font-size: 24px;
+}
+
+header p {
+    color: #666;
+}
+
+.content-list {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 10px; /* 添加内边距 */
+}
+
+/* 整个框可点击的样式 - 修复版本 */
+.content-item-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    margin-bottom: 6px; /* 按钮之间的空隙 */
+}
+
+.content-item-link:last-child {
+    margin-bottom: 0;
+}
+
+.content-item-link:hover .content-item {
+    background: linear-gradient(to right, #ff9269, #ffaa8b);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.content-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 6px;
+    /* 确保没有下划线 */
+    border: none;
+    text-decoration: none;
+}
+
+.content-item * {
+    text-decoration: none !important; /* 确保所有子元素都没有下划线 */
+}
+
+.item-title {
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none !important;
+}
+
+.arrow {
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none !important;
+}
+
+/* 其他样式保持不变... */
+footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
+    padding: 15px;
+    font-size: 14px;
+}
+
+.admin-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.admin-link a {
+    color: #666;
+    text-decoration: none;
+}
+
+.admin-link a:hover {
+    text-decoration: underline;
+}
+
+/* 登录表单样式 */
+.login-form {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    max-width: 400px;
+    margin: 50px auto;
+}
+
+.login-form h2 {
+    text-align: center;
+    margin-bottom极速影视: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+button {
+    background: #ff7e5f;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #feb47b;
+}
+
+.error {
+    color: red;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #ffe6e6;
+    border-radius: 4px;
+    border: 1px solid #ffcd极速影视d2;
+}
+
+.message {
+    color: green;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #e6ffe6;
+    border-radius: 4px;
+    border: 1px solid #c8e6c9;
+}
+
+/* 后台管理样式 */
+.dashboard {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.stats {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.admin-actions h2 {
+    margin-bottom: 20px;
+}
+
+.action-item {
+    margin-bottom: 30px;
+    padding-bottom: 20极速影视px;
+    border-bottom: 1px solid #eee;
+}
+
+.action-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.action-item h3 {
+    margin-bottom: 15px;
+}
+
+.action-item a {
+    color: #ff7e5f;
+    text-decoration: none;
+}
+
+.action-item a:hover {
+    text-decoration: underline;
+}
+
+/* 标签页样式 */
+.tab-content { 
+    display: none; 
+}
+
+.tab-content.active { 
+    display: block; 
+}
+
+.tab-button { 
+    padding: 10px 15px; 
+    margin-right: 5px; 
+    background: #eee; 
+    border: none; 
+    cursor: pointer; 
+    border-radius: 4px 4px 0 0;
+}
+
+.tab-button.active { 
+    background: #ff7e5f; 
+    color: white; 
+}
+
+.button-list { 
+    list-style: none; 
+    margin: 15px 0; 
+}
+
+.button-list li { 
+    padding: 10px极速影视; 
+    background:极速影视 #f9f9f9; 
+    margin-bottom: 5px; 
+    border-radius: 4px; 
+极速影视    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+.button-actions { 
+    display: flex; 
+    gap: 5px; 
+}
+
+.button-actions form { 
+    margin: 0; 
+}
+
+.sortable-placeholder {
+    height: 40px;
+    background: #eee;
+    margin-bottom: 5极速影视px;
+    border-radius: 4px;
+}
+
+.file-list {
+    list-style: none;
+    margin: 15px 0;
+}
+
+.file-list li {
+    padding: 10px;
+    background: #f9f9f9;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 编辑页面样式 */
+.edit-page-btn {
+    padding: 5px 10px;
+    background: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+}
+
+.edit-page-btn:hover {
+    background: #45a049;
+}
+
+.editor-actions {
+    margin: 15px 0;
+    display: flex;
+    gap: 10px;
+}
+
+.editor-actions a {
+    padding: 8px 15px;
+    background: #eee;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #333;
+    transition: background 0.3s ease;
+}
+
+.editor-actions a:hover {
+    background: #ddd;
+}
+
+/* 登录容器样式 */
+.login-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* 响应式设计 */
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .content-item {
+        padding: 12px 15px;
+    }
+    
+    .item-title {
+        font-size: 14px;
+    }
+    
+    .dashboard {
+        padding: 15px;
+    }
+    
+    .button-actions {
+        flex-direction: column;
+    }
+    
+    .editor-actions {
+        flex-direction: column;
+    }
+    
+    .content-item-link {
+        margin-bottom: 6px;
+    }
+}

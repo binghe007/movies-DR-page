@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>捕风追影 - 图片上传任务</title>
+    <!-- 标题修改 -->
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c 0%, #2c3e50 100%);
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 50px;
+            min-height: 100vh;
+        }
+        
+        /* 状态栏样式 - 模仿手机顶部状态栏 */
+        .status-bar {
+            background: #000;
+            color: white;
+            padding: 5px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .status-bar-left {
+            display: flex;
+            align-items: center;
+        }
+        
+        .status-bar-right {
+            display: flex;
+            align-items: center;
+        }
+        
+        .time {
+            margin-right: 10px;
+        }
+        
+        .network-info {
+            margin-right: 5px;
+        }
+        
+        .battery {
+            margin-left: 10px;
+        }
+        
+        /* 内容容器 */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            margin-top: 10px;
+        }
+        
+        /* 电影海报区域 */
+        .movie-poster {
+            width: 100%;
+            position: relative;
+        }
+        
+        .movie-poster img {
+            width: 100%;
+            display: block;
+        }
+        
+        .release-date {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        /* 电影信息 */
+        .movie-info {
+            padding: 15px;
+            background: #f8f9fa;
+        }
+        
+        .movie-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #182848;
+        }
+        
+        .movie-title-en {
+            font-size: 16px;
+            color: #4b6cb7;
+            margin-bottom: 15px;
+        }
+        
+        .movie-crew {
+            font-size: 14px;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        /* 参与统计 */
+        .participation {
+            text-align: center;
+            padding: 10px;
+            background: #e9ecef;
+            font-size: 14px;
+            color: #495057;
+        }
+        
+        /* 说明区域 */
+        .instructions {
+            padding: 20px 15px;
+            background: white;
+        }
+        
+        .instructions h3 {
+            color: #4b6cb7;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .instructions p {
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        /* 步骤区域 */
+        .steps {
+            padding: 15px;
+            background: #f8f9fa;
+        }
+        
+        .step {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #dee2e6;
+        }
+        
+        .step:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .step-title {
+            font-weight: bold;
+            color: #4b6cb7;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        
+        .step-content {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        /* 上传区域 */
+        .upload-area {
+            border: 2px dashed #4b6cb7;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin: 15px 0;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .upload-area:hover {
+            background: #e9ecef;
+            border-color: #182848;
+        }
+        
+        .upload-icon {
+            font-size: 36px;
+            color: #4b6cb7;
+            margin-bottom: 10px;
+        }
+        
+        .upload-text {
+            font-size: 14px;
+            color: #495057;
+            margin-bottom: 10px;
+        }
+        
+        .upload-hint {
+            font-size: 12px;
+            color: #6c757d;
+        }
+        
+        /* 提交按钮 */
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .submit-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        .submit-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* 底部播放控制栏 */
+        .player-controls {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .player-time {
+            font-size: 14px;
+        }
+        
+        .player-battery {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 480px) {
+            .container {
+                border-radius: 0;
+                margin-top: 0;
+            }
+            
+            .movie-title {
+                font-size: 20px;
+            }
+            
+            .movie-title-en {
+                font-size: 14px;
+            }
+            
+            .step-title {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 状态栏 -->
+    <div class="status-bar">
+        <div class="status-bar-left">
+            <span class="time">11:27</span>
+            <span class="network-info">5G HD</span>
+        </div>
+        <div class="status-bar-right">
+            <span class="network-speed">4.00 KB/s</span>
+            <span class="battery">91%</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="movie-poster">
+            <img src="xxxx" alt="bbb">
+               <!-- 将你需要的图片转换成base64编码 然后替换成上面的xxx bbb为鼠标悬停时显示信息 在线图片转base64网站 https://tooltool.net/zh/image-to-base64 -->
+            <div class="release-date">8月16日 全国上映</div><!-- 可修改 -->
+        </div>
+        
+        <!-- 电影信息 可修改-->
+        <div class="movie-info">
+            <div class="movie-title">捕风追影</div>
+            <div class="movie-title-en">THE SHADOW'S EDGE</div>
+            <div class="movie-crew">
+                编剧/导演：杨子<br>
+                主演：文俊辉、周政杰、王紫逸、郎月婷、林秋楠、王振威、李哲坤
+            </div>
+        </div>
+        
+        <!-- 参与统计 -->
+        <div class="participation">
+            已9999+人次参与
+        </div>
+        
+        <!-- 说明区域 -->
+        <div class="instructions">
+            <h3>活动说明</h3>
+            <p>因为软件本身不需要付费也没有广告，所以请大家帮忙宣传一下，设置了一点小任务防止同行捣乱，详细请看下面步骤。</p>
+        </div>
+        
+        <!-- 步骤区域 -->
+        <div class="steps">
+            <div class="step">
+                <div class="step-title">第一步：保存宣传图片</div>
+                <div class="step-content">点击下面图片保存到相册里面</div>
+                <!-- 宣传图片 -->
+                <div class="upload-area" onclick="alert('图片已保存到相册')">
+                    <img src="xxxx" alt="bbb">
+               <!-- 将你需要的图片转换成base64编码 然后替换成上面的xxx bbb为鼠标悬停时显示信息 在线图片转base64网站 https://tooltool.net/zh/image-to-base64 -->
+                    <div class="upload-text">点击保存宣传图片</div>
+                    <div class="upload-hint">长按图片即可保存到手机相册</div>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-title">第二步：小红书评论任务</div>
+                <div class="step-content">
+                    打开小红书平台，搜索与【捕风追影】相关的作品，找到最少3条，然后评论刚刚保存的图片并截图。记得评论打上开心表情就好。
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-title">第三步：提交截图</div>
+                <div class="step-content">
+                    把截图在下面提交，提交完以后，AI机器人会自动审核，审核成功就会自动跳转到领取页。
+                </div>
+                
+                <!-- 第一张图上传区域 -->
+                <div class="upload-area" onclick="handleUpload(1)">
+                    <div class="upload-icon">📁</div>
+                    <div class="upload-text">第一张图这里上传</div>
+                    <div class="upload-hint">最多上传一张，单张图片10MB以内</div>
+                </div>
+                
+                <!-- 第三张图上传区域 -->
+                <div class="upload-area" onclick="handleUpload(2)">
+                    <div class="upload-icon">📁</div>
+                    <div class="upload-text">第三张图这里上传</div>
+                    <div class="upload-hint">最多上传一张，单张图片10MB以内</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 提交按钮 -->
+        <button class="submit-btn" id="submitBtn" disabled onclick="submitForm()">提交</button>
+    </div>
+    
+    <!-- 底部播放控制栏 -->
+    <div class="player-controls">
+        <div class="player-time">4:53</div>
+        <div class="player-battery">4G | 52%</div>
+    </div>
+
+    <script>
+        // 跟踪上传状态
+        let uploads = {
+            first: false,
+            second: false
+        };
+        
+        /**
+         * 处理图片上传（模拟）
+         * @param {number} type - 上传类型：1表示第一张图，2表示第三张图
+         */
+        function handleUpload(type) {
+            // 创建文件输入元素
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = 'image/*';
+            
+            // 处理文件选择
+            fileInput.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    // 检查文件大小（模拟）
+                    if (file.size > 10 * 1024 * 1024) {
+                        alert('图片大小不能超过10MB');
+                        return;
+                    }
+                    
+                    // 模拟上传成功
+                    if (type === 1) {
+                        uploads.first = true;
+                        alert('第一张图片上传成功！');
+                    } else {
+                        uploads.second = true;
+                        alert('第三张图片上传成功！');
+                    }
+                    
+                    // 检查是否所有图片都已上传
+                    checkUploadStatus();
+                }
+            };
+            
+            // 触发文件选择对话框
+            fileInput.click();
+        }
+        
+        /**
+         * 检查上传状态并更新提交按钮
+         */
+        function checkUploadStatus() {
+            const submitBtn = document.getElementById('submitBtn');
+            if (uploads.first && uploads.second) {
+                submitBtn.disabled = false;
+            }
+        }
+        
+        /**
+         * 提交表单
+         */
+        function submitForm() {
+            // 模拟AI审核过程
+            alert('AI机器人正在审核您的截图...');
+            
+            // 模拟审核延迟
+            setTimeout(function() {
+                // 审核成功，跳转到1.html                 跳转页面 修改为你需要跳转到的页面
+                window.location.href = '1.html';
+            }, 2000);
+        }
+        
+        // 添加滚动效果
+        document.addEventListener('DOMContentLoaded', function() {
+            let lastScrollTop = 0;
+            
+            window.addEventListener('scroll', function() {
+                const statusBar = document.querySelector('.status-bar');
+                const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (currentScrollTop > lastScrollTop) {
+                    // 向下滚动
+                    statusBar.style.opacity = '0.7';
+                } else {
+                    // 向上滚动
+                    statusBar.style.opacity = '1';
+                }
+                
+                lastScrollTop = currentScrollTop;
+            });
+        });
+    </script>
+</body>
+</html>
