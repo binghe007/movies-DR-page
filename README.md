@@ -2,8 +2,9 @@
 电影引流引导页源码
 # 前台
 <img width="852" height="908" alt="06c767ac6fbcfc3400e99b7d3f0e54dd" src="https://github.com/user-attachments/assets/04e75ff5-0300-4ca9-9535-e3c4ef53280f" />
-![909d2932ab2fb45459f37cdc0fc96f61](https://github.com/user-attachments/assets/e8eaa378-ab1c-4c0d-b95e-c0215f3b5f43)
-![b16fcbdec570c30bcafa614e92fc8cf8](https://github.com/user-attachments/assets/a457765d-80cb-4445-babe-d5804b675d82)
+<img width="631" height="894" alt="f7db9fe7f00eb047903f8c04a62286e8" src="https://github.com/user-attachments/assets/659f3fc7-0bc5-4066-b1bd-28c289ae0ab3" />
+<img width="739" height="940" alt="dd342694d172e936aab1d3563f8091e3" src="https://github.com/user-attachments/assets/a1d4e8c1-24d2-40f1-b18a-95e1f01e7ee0" />
+
 # 后台
 <img width="699" height="599" alt="58232b76288adc630eda20ebfa27bf07" src="https://github.com/user-attachments/assets/ccbe2c46-4c46-4c4b-a201-ad3d9f546d74" />
 <img width="761" height="934" alt="bff17cfc0e040b5ddfc7d31454721ff7" src="https://github.com/user-attachments/assets/f946df87-b51b-4f25-bab6-d72a9d46ee56" />
