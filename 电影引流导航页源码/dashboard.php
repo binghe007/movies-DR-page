@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $config['site_title'] = $_POST['site_title'];
         $config['subtitle'] = $_POST['subtitle'];
         $config['footer_text'] = $_POST['footer_text'];
-        file_put_contents('config极速影视/site_config.json', json_encode($config));
+        file_put_contents('config/site_config.json', json_encode($config));
         $message = "网站信息已更新";
     } elseif (isset($_POST['update_account'])) {
         // 更新管理员账户
@@ -87,7 +87,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if (isset($_POST['upload_file'])) {
     if (isset($_FILES['uploaded_file']) && $_FILES['uploaded_file']['error'] === UPLOAD_ERR_OK) {
         $target_dir = "content/pages/";
-        // 确保目录存在
         if (!file_exists($target_dir)) {
             mkdir($target_dir, 0777, true);
         }
@@ -208,9 +207,9 @@ if (isset($_POST['delete_file'])) {
         <?php endif; ?>
         
         <div class="dashboard">
-            <div class极速影视="stats">
+            <div class="stats">
                 <h2>网站统计</h2>
-                <极速影视p>总浏览量: <?php echo $pageViews; ?></p>
+                <p>总浏览量: <?php echo $pageViews; ?></p>
             </div>
             
             <div class="admin-actions">
@@ -227,17 +226,17 @@ if (isset($_POST['delete_file'])) {
                     <form method="post">
                         <div class="form-group">
                             <label for="site_title">主标题:</label>
-                            <input type="text" id="site_title" name="site_title" value="<?php echo $config['site_title']; ?>" required>
+                            <input type="text" id="site_title" name="site_title" value="<?php echo htmlspecialchars($config['site_title']); ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="subtitle">副标题:</label>
-                            <input type="text" id="subtitle" name="subtitle" value="<?php echo $config['subtitle']; ?>" required>
+                            <input type="text" id="subtitle" name="subtitle" value="<?php echo htmlspecialchars($config['subtitle']); ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="footer_text">底部文本:</label>
-                            <input type="text" id="footer_text极速影视" name="footer_text" value="<?php echo $config['footer_text']; ?>">
+                            <input type="text" id="footer_text" name="footer_text" value="<?php echo htmlspecialchars($config['footer_text']); ?>">
                         </div>
-                        <button type="submit" name="update极速影视_site">更新主页内容</button>
+                        <button type="submit" name="update_site">更新主页内容</button>
                     </form>
                 </div>
                 
@@ -270,7 +269,7 @@ if (isset($_POST['delete_file'])) {
                                 </div>
                                 <div class="button-actions">
                                     <button type="button" onclick="editButton('<?php echo $button['id']; ?>', '<?php echo $button['text']; ?>', '<?php echo $button['link']; ?>')">编辑</button>
-                                    <form method="post">
+                                    <form method="post" style="display:inline;">
                                         <input type="hidden" name="button_id" value="<?php echo $button['id']; ?>">
                                         <button type="submit" name="delete_button">删除</button>
                                     </form>
@@ -322,7 +321,7 @@ if (isset($_POST['delete_file'])) {
                     <h4>现有文件</h4>
                     <ul class="file-list">
                         <?php
-                        if (file_exists('content/pages/')) {
+                        if (is_dir('content/pages/')) {
                             $files = scandir('content/pages/');
                             foreach ($files as $file) {
                                 if ($file !== '.' && $file !== '..') {
