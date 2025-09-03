@@ -1,6 +1,8 @@
 # movies-DR-page
 电影引流引导页源码
 初始管理员账号 admin 密码123456
+
+oreighfoerdiu.php用来修改后台查看的浏览量 填写0实现重置
 # 前台
 <img width="852" height="908" alt="06c767ac6fbcfc3400e99b7d3f0e54dd" src="https://github.com/user-attachments/assets/04e75ff5-0300-4ca9-9535-e3c4ef53280f" />
 <img width="631" height="894" alt="f7db9fe7f00eb047903f8c04a62286e8" src="https://github.com/user-attachments/assets/659f3fc7-0bc5-4066-b1bd-28c289ae0ab3" />
